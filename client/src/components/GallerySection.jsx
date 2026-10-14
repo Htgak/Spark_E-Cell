@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, ArrowRight, X, Play, Pause, Maximize2 } from 'lucide-react';
-import { fetchGallery } from '../api';
+import { fetchGallery, resolveMediaUrl } from '../api';
 
 const defaultFallbackImages = [
   {
@@ -202,7 +202,7 @@ export default function GallerySection() {
                 onClick={() => { if (Math.abs(dragOffset) < 10) setLightboxImage(img); }}
               >
                 <img
-                  src={img.url}
+                  src={resolveMediaUrl(img.url)}
                   alt={img.title}
                   draggable={false}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
@@ -243,7 +243,7 @@ export default function GallerySection() {
                 title={img.title}
                 aria-label={`Photo ${idx + 1}`}
               >
-                <img src={img.url} alt={img.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src={resolveMediaUrl(img.url)} alt={img.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </button>
             );
           })}
@@ -259,7 +259,7 @@ export default function GallerySection() {
             onClick={(e) => e.stopPropagation()}
           >
             <div style={{ position: 'relative', width: '100%', height: 'clamp(280px, 55vw, 520px)', display: 'flex' }}>
-              <img src={lightboxImage.url} alt={lightboxImage.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={resolveMediaUrl(lightboxImage.url)} alt={lightboxImage.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
 
               {/* Close */}
               <button

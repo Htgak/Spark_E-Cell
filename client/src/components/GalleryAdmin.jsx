@@ -5,7 +5,8 @@ import {
   createGalleryImage, 
   updateGalleryImage, 
   deleteGalleryImage,
-  uploadGalleryImage
+  uploadGalleryImage,
+  resolveMediaUrl
 } from '../api';
 import { Edit2, Trash2, AlertCircle } from 'lucide-react';
 
@@ -179,7 +180,7 @@ export default function GalleryAdmin({ onNotification }) {
             {url && (
               <div style={{ marginBottom: '18px', width: '100%', height: '140px', borderRadius: 'var(--radius-md)', overflow: 'hidden', border: '1px solid #e5e7eb', backgroundColor: '#1f2937' }}>
                 <img
-                  src={url}
+                  src={resolveMediaUrl(url)}
                   alt="Preview"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onError={(e) => {
@@ -263,7 +264,7 @@ export default function GalleryAdmin({ onNotification }) {
               >
                 <div style={{ width: '64px', height: '48px', borderRadius: 'var(--radius-sm)', overflow: 'hidden', flexShrink: 0, backgroundColor: '#1f2937' }}>
                   <img
-                    src={item.url}
+                    src={resolveMediaUrl(item.url)}
                     alt={item.title}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />

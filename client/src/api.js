@@ -22,6 +22,18 @@ export function isAuthenticated() {
 
 const API_BASE = (import.meta.env.VITE_API_BASE || '').trim().replace(/\/api\/?$/, '').replace(/\/$/, '');
 
+export function resolveMediaUrl(url) {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url;
+  }
+  if (url.startsWith('/uploads')) {
+    const base = API_BASE || 'https://spark-e-cell.onrender.com';
+    return `${base}${url}`;
+  }
+  return url;
+}
+
 async function request(url, options = {}) {
   const headers = {
     'Content-Type': 'application/json',

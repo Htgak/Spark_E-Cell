@@ -373,10 +373,33 @@ app.delete('/api/admin/gallery/:id', requireAuth, (req, res) => {
 });
 
 // ------------------------------------
-// Production Static Files & SPA Fallback
+// Health Check & Root Info
 // ------------------------------------
 
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 const clientDistPath = path.join(__dirname, '../client/dist');
+
+app.get('/', (req, res, next) => {
+  if (fs.existsSync(clientDistPath)) {
+    return next();
+  }
+  res.json({
+    status: 'online',
+    message: 'Spark E-Cell Backend API is running successfully',
+    endpoints: {
+      posts: '/api/posts',
+      gallery: '/api/gallery',
+      health: '/api/health'
+    }
+  });
+});
+
+// ------------------------------------
+// Production Static Files & SPA Fallback
+// ------------------------------------
 if (fs.existsSync(clientDistPath)) {
   app.use(express.static(clientDistPath));
 

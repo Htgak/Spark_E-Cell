@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Sun, Moon } from 'lucide-react';
 
 /* ── Social icon SVGs (inline, no external dependency) ── */
 function IconInstagram({ size = 18 }) {
@@ -39,7 +40,7 @@ const SOCIAL_LINKS = [
   
 ];
 
-function SocialIconBtn({ label, href, Icon, hoverColor }) {
+function SocialIconBtn({ label, href, Icon, hoverColor, className = '' }) {
   return (
     <a
       href={href}
@@ -47,6 +48,7 @@ function SocialIconBtn({ label, href, Icon, hoverColor }) {
       rel="noopener noreferrer"
       aria-label={label}
       title={label}
+      className={`social-nav-btn ${className}`.trim()}
       style={{
         width: 36,
         height: 36,
@@ -81,6 +83,20 @@ function SocialIconBtn({ label, href, Icon, hoverColor }) {
 export default function Layout() {
   const location = useLocation();
   const isHome = location.pathname === '/';
+
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('spark_theme') || 
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('spark_theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
 
   const scrollToSection = (id) => {
     if (!isHome) {
@@ -123,12 +139,21 @@ export default function Layout() {
             </ul>
           </nav>
 
-          {/* Right: Social icons + Admin */}
+          {/* Right: Social icons + Theme Toggle + Admin */}
           <div className="header-actions">
             {SOCIAL_LINKS.map(s => (
-              <SocialIconBtn key={s.label} {...s} />
+              <SocialIconBtn key={s.label} {...s} className="header-social-btn" />
             ))}
-            <Link to="/admin" className="btn-pill-primary btn-pill-sm">
+            <button
+              type="button"
+              className="theme-toggle-btn"
+              onClick={toggleTheme}
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+            </button>
+            <Link to="/admin" className="btn-pill-primary btn-pill-sm nav-admin-btn">
               Admin
             </Link>
           </div>

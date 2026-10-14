@@ -44,6 +44,92 @@
   --shadow-nav: none;
 }
 
+/* ======================== DARK THEME ======================== */
+[data-theme="dark"] {
+  --bg-canvas: #0e1117;
+  --bg-white: #161b22;
+  --bg-subtle: #21262d;
+  --bg-muted: #30363d;
+  --border-subtle: #30363d;
+  --border-hover: #484f58;
+  --border-focus: #ed7840;
+  --text-primary: #e6edf3;
+  --text-heading: #ffffff;
+  --text-secondary: #9da7b3;
+  --text-muted: #6e7681;
+  --text-placeholder: #484f58;
+  --badge-green-bg: rgba(50, 98, 64, 0.35);
+  --badge-green-text: #6ee7b7;
+  --badge-amber-bg: rgba(138, 97, 28, 0.35);
+  --badge-amber-text: #fcd34d;
+  --badge-rose-bg: rgba(163, 66, 43, 0.35);
+  --badge-rose-text: #fca5a5;
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 8px 28px rgba(0, 0, 0, 0.5);
+  --shadow-card-hover: 0 12px 36px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .site-header {
+  background: rgba(14, 17, 23, 0.94);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+[data-theme="dark"] .hero-section {
+  background-color: var(--bg-canvas);
+}
+
+[data-theme="dark"] .hero-section::before {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+}
+
+[data-theme="dark"] .hero-section::after {
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(14, 17, 23, 0.15) 0%, rgba(14, 17, 23, 0.75) 70%, var(--bg-canvas) 100%);
+}
+
+[data-theme="dark"] .site-footer {
+  background: #12151d;
+  border-top: 1px solid var(--border-subtle);
+}
+
+[data-theme="dark"] .btn-pill-primary,
+[data-theme="dark"] .btn-pill-solid {
+  background: #ffffff;
+  color: #0e1117;
+}
+
+[data-theme="dark"] .btn-pill-primary:hover,
+[data-theme="dark"] .btn-pill-solid:hover {
+  background: #e2e8f0;
+}
+
+.theme-toggle-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-subtle);
+  background: var(--bg-white);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-xs);
+  cursor: pointer;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-subtle);
+  border-color: var(--border-hover);
+  color: var(--text-heading);
+  transform: rotate(15deg);
+}
+
+[data-theme="dark"] .theme-toggle-btn {
+  color: #f5c518;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 html, body, #root { min-height: 100%; width: 100%; }
@@ -199,15 +285,28 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .admin-grid { display: grid; grid-template-columns: minmax(300px,.85fr) minmax(0,1.15fr); align-items: start; }
   .admin-grid > div:first-child, .admin-grid > div:last-child { min-width: 0; }
 }
-@media (max-width: 760px) {
-  .nav-inner { height: 66px; padding: 0 14px; gap: 8px; }
-  .nav-links { gap: 12px; }
-  .nav-links .nav-link { font-size: 12px; }
-  .brand-main-title { font-size: 12px; }
-  .brand-sub-badge { font-size: 8px; }
-  .logo-sbit { width: 31px; height: 31px; }
-  .logo-spark { height: 26px; }
+@media (max-width: 768px) {
+  .nav-inner { height: 68px; padding: 0 14px; gap: 10px; justify-content: space-between; }
+  .nav-links { display: none; } /* Hide text links on mobile to prevent navbar overflow */
+  .header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .header-actions .header-social-btn { display: none; } /* Social icons remain in footer */
   .header-actions .btn-pill-outline { display: none; }
+  .nav-admin-btn {
+    display: inline-flex !important;
+    min-height: 34px !important;
+    padding: 6px 14px !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    flex-shrink: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .theme-toggle-btn { width: 34px; height: 34px; flex-shrink: 0; }
+  .brand-logos-group { gap: 8px; }
+  .brand-main-title { font-size: 13px; }
+  .brand-sub-badge { font-size: 8px; }
+  .logo-sbit { width: 32px; height: 32px; }
+  .logo-spark { height: 28px; width: auto; }
   .hero-section { padding: 62px 20px 72px; }
   .hero-heading { font-size: clamp(3rem, 14vw, 5.3rem); }
   .hero-lead { font-size: 15px; }
@@ -218,14 +317,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .gallery-stage { height: 300px; }
 }
 @media (max-width: 420px) {
-  .brand-logos-group { gap: 4px; }
-  .brand-main-title { font-size: 10px; }
-  .brand-sub-badge { font-size: 7px; }
-  .logo-sbit { width: 27px; height: 27px; }
-  .logo-spark { height: 50px; }
-  .nav-links { gap: 7px; }
-  .nav-links .nav-link { padding: 5px 2px; font-size: 11px; }
-  .header-actions .btn-pill-primary, .header-actions .btn-pill-outline { padding: 6px 9px; font-size: 10px; }
+  .nav-inner { padding: 0 10px; gap: 6px; }
+  .brand-logos-group { gap: 6px; }
+  .brand-main-title { font-size: 11.5px; }
+  .brand-sub-badge { font-size: 7.5px; }
+  .logo-sbit { width: 28px; height: 28px; }
+  .logo-spark { height: 24px; width: auto; }
+  .header-actions { gap: 6px; }
+  .nav-admin-btn { padding: 5px 11px !important; font-size: 11px !important; min-height: 32px !important; }
+  .theme-toggle-btn { width: 32px; height: 32px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -322,19 +422,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .logo-sbit { width: 58px; height: 58px; padding: 1px; }
 .logo-spark { height: 80px; width: 88px; object-fit: contain; }
 .logo-nec { width: 160px; height: 60px; object-fit: contain; border-radius: 3px; }
-@media (max-width: 760px) {
-  .nav-inner { height: 76px; }
-  .brand-logos-group { gap: 10px; }
-  .logo-sbit { width: 46px; height: 46px; }
-  .logo-spark { width: 50px; height: 50px; }
-  .logo-nec { width: 112px; height: 46px; }
-}
-@media (max-width: 420px) {
-  .brand-logos-group { gap: 6px; }
-  .logo-sbit { width: 38px; height: 38px; }
-  .logo-spark { width: 58px; height: 42px; }
-  .logo-nec { width: 88px; height: 38px; }
-}
+
 
 /* ======================== ECOSYSTEM SECTION ======================== */
 .ecosystem-section {

@@ -104,7 +104,7 @@ export default function Home() {
               </p>
               <div style={{ marginTop: 8 }}>
                 <a
-                  href="https://eureka.sparkecell.in"   /* ← same URL */
+                  href="https://spark-ecell-eureka.netlify.app/"   /* ← same URL */
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-eureka"

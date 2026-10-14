@@ -20,6 +20,8 @@ export function isAuthenticated() {
   return Boolean(getToken());
 }
 
+const API_BASE = (import.meta.env.VITE_API_BASE || '').trim().replace(/\/api\/?$/, '').replace(/\/$/, '');
+
 async function request(url, options = {}) {
   const headers = {
     'Content-Type': 'application/json',
@@ -31,7 +33,9 @@ async function request(url, options = {}) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const response = await fetch(url, {
+  const targetUrl = url.startsWith('http') ? url : `${API_BASE}${url}`;
+
+  const response = await fetch(targetUrl, {
     ...options,
     headers
   });

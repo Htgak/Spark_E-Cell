@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 
 /* ── Social icon SVGs (inline, no external dependency) ── */
 function IconInstagram({ size = 18 }) {
@@ -98,7 +98,14 @@ export default function Layout() {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   };
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const scrollToSection = (id) => {
+    setMobileMenuOpen(false);
     if (!isHome) {
       window.location.href = `/#${id}`;
       return;
@@ -139,7 +146,7 @@ export default function Layout() {
             </ul>
           </nav>
 
-          {/* Right: Social icons + Theme Toggle + Admin */}
+          {/* Right: Social icons + Theme Toggle + Admin + Hamburger */}
           <div className="header-actions">
             {SOCIAL_LINKS.map(s => (
               <SocialIconBtn key={s.label} {...s} className="header-social-btn" />
@@ -156,8 +163,57 @@ export default function Layout() {
             <Link to="/admin" className="btn-pill-primary btn-pill-sm nav-admin-btn">
               Admin
             </Link>
+            {/* 3 Horizontal Lines (Hamburger Menu) Button on Mobile */}
+            <button
+              type="button"
+              className="mobile-menu-btn"
+              onClick={() => setMobileMenuOpen(prev => !prev)}
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              title={mobileMenuOpen ? 'Close menu' : 'Open navigation menu'}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
+
+        {/* ── Expandable Mobile Drawer Menu ── */}
+        {mobileMenuOpen && (
+          <div className="mobile-menu-dropdown">
+            <nav className="mobile-nav-links">
+              <button onClick={() => scrollToSection('about')} className="mobile-nav-link">
+                About
+              </button>
+              <button onClick={() => scrollToSection('gallery')} className="mobile-nav-link">
+                Gallery
+              </button>
+              <button onClick={() => scrollToSection('blog')} className="mobile-nav-link">
+                Blog
+              </button>
+            </nav>
+            <div className="mobile-menu-divider" />
+            <Link
+              to="/admin"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-admin-btn"
+            >
+              🔒 Admin Portal
+            </Link>
+            <div className="mobile-social-row">
+              {SOCIAL_LINKS.map(s => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mobile-social-pill"
+                >
+                  <s.Icon size={15} />
+                  <span>{s.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* ── Main content ── */}
@@ -174,11 +230,13 @@ export default function Layout() {
               <img
                 src="/images/sbit-logo.png"
                 alt="SBIT"
-                style={{ height: 28, borderRadius: '50%', border: '1.5px solid #e2e8f0', padding: 2, background: '#fff' }}
+                className="logo-sbit"
+                style={{ width: 32, height: 32 }}
               />
               <img
                 src="/images/spark-ecell-logo.png"
                 alt="Spark E-Cell"
+                className="logo-spark"
                 style={{ height: 26, objectFit: 'contain' }}
               />
               <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--text-heading)' }}>SPARK E-CELL</span>

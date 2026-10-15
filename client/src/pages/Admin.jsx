@@ -171,7 +171,7 @@ export default function Admin() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', width: '100%' }}>
       {/* Top Admin Control Bar */}
-      <div className="canvas-card" style={{ padding: '24px 32px' }}>
+      <div className="canvas-card admin-control-card">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <div className="section-tag">/ OPERATIONS DESK</div>
@@ -180,7 +180,7 @@ export default function Admin() {
             </h2>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          <div className="admin-header-actions">
             <button
               type="button"
               className="btn-pill-outline btn-pill-sm"
@@ -205,7 +205,7 @@ export default function Admin() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '10px', marginTop: '24px', paddingTop: '16px', borderTop: '1px solid var(--border-subtle)' }}>
+        <div className="admin-tabs-nav" style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid var(--border-subtle)' }}>
           <button
             type="button"
             onClick={() => setActiveTab('posts')}
@@ -221,7 +221,8 @@ export default function Admin() {
               border: activeTab === 'posts' ? '1.5px solid var(--accent-blue)' : '1.5px solid var(--border-subtle)',
               backgroundColor: activeTab === 'posts' ? 'var(--accent-blue)' : 'var(--bg-white)',
               color: activeTab === 'posts' ? '#ffffff' : 'var(--text-secondary)',
-              transition: 'all 0.15s ease'
+              transition: 'all 0.15s ease',
+              whiteSpace: 'nowrap'
             }}
           >
             <BookOpen size={15} /> Blog Posts &amp; Scheduling
@@ -242,7 +243,8 @@ export default function Admin() {
               border: activeTab === 'gallery' ? '1.5px solid var(--accent-blue)' : '1.5px solid var(--border-subtle)',
               backgroundColor: activeTab === 'gallery' ? 'var(--accent-blue)' : 'var(--bg-white)',
               color: activeTab === 'gallery' ? '#ffffff' : 'var(--text-secondary)',
-              transition: 'all 0.15s ease'
+              transition: 'all 0.15s ease',
+              whiteSpace: 'nowrap'
             }}
           >
             <Image size={15} /> Gallery Photos &amp; Media

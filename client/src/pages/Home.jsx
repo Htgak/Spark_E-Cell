@@ -3,12 +3,13 @@ import HeroSection from '../components/HeroSection';
 import GallerySection from '../components/GallerySection';
 import PostCard from '../components/PostCard';
 import { fetchPublishedPosts } from '../api';
-import { RefreshCw, BookOpen, AlertCircle } from 'lucide-react';
+import { RefreshCw, BookOpen, AlertCircle, Compass, UsersRound, Rocket, Lightbulb, Landmark, Sparkles, ExternalLink } from 'lucide-react';
+import { motion } from 'motion/react';
 
 const FEATURES = [
-  { title: 'Learn by doing', desc: 'Work through real problems, test early ideas and build practical skills with your peers.' },
-  { title: 'Find your people', desc: 'Meet students who share your curiosity and mentors who can help you move forward.' },
-  { title: 'Take the next step', desc: 'Shape a promising idea into a prototype, project or venture worth pursuing.' }
+  { number: '01', icon: Compass, title: 'Explore without a map', desc: 'Start with curiosity. Discover problems worth solving and learn how to ask sharper questions.' },
+  { number: '02', icon: UsersRound, title: 'Build with your people', desc: 'Meet collaborators, get honest feedback and find mentors who help good ideas grow.' },
+  { number: '03', icon: Rocket, title: 'Make the first move', desc: 'Turn a promising thought into an experiment, a prototype, or your next big thing.' }
 ];
 
 export default function Home() {
@@ -43,35 +44,35 @@ export default function Home() {
       {/* ── 2. Features / Why Spark E-Cell ── */}
       <section className="features-section section-wrapper" id="features">
         <div className="section-inner">
-          <div className="features-header">
-              <div className="section-tag">What we do</div>
-            <h2 className="section-title">From first thought to first venture.</h2>
-            <p className="section-lead">
-              Find your people, test your thinking and build something real, one step at a time.
-            </p>
+          <div className="journey-heading">
+            <div className="features-header">
+              <div className="section-tag">A LITTLE LESS “SOMEDAY”</div>
+              <h2 className="section-title">Your idea has a <em>next step.</em></h2>
+              <p className="section-lead">You don’t need a perfect plan. Just a place to start, people to learn with, and room to try.</p>
+            </div>
+            <span className="journey-side-note">THE SPARK<br/>JOURNEY</span>
           </div>
-
-          <div className="features-grid">
-            {FEATURES.map((f) => (
-              <div key={f.title} className="feature-card">
-                
-                <div className="feature-title">{f.title}</div>
-                <p className="feature-desc">{f.desc}</p>
-              </div>
+          <div className="features-grid journey-grid">
+            {FEATURES.map(({ icon: Icon, ...f }, i) => (
+              <motion.article key={f.title} className="feature-card journey-card" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .22 }} transition={{ duration: .55, delay: i * .12 }} whileHover={{ y: -8 }}>
+                <div className="journey-card-top"><span>{f.number}</span><Icon size={22} strokeWidth={1.6} /></div>
+                <div className="journey-card-bottom"><div className="feature-title">{f.title}</div><p className="feature-desc">{f.desc}</p></div>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── 3. Stats Banner ── */}
+      <section className="manifesto-band"><div className="manifesto-inner"><span>THINK IT.</span><span className="manifesto-mark">✳</span><span>TRY IT.</span><span className="manifesto-mark">✳</span><span>MAKE IT REAL.</span></div></section>
       <GallerySection />
 
       {/* ── 4. Our Ecosystem — Other Websites + Eureka Button ── */}
       <section className="ecosystem-section section-wrapper" id="ecosystem">
         <div className="section-inner">
-          <div className="features-header" style={{ textAlign: 'center', marginBottom: 0 }}>
-            <div className="section-tag" style={{ display: 'inline-flex' }}>🌐 Our Ecosystem</div>
-            <h2 className="section-title" style={{ marginTop: 12 }}>Explore Our World</h2>
+          <div className="features-header ecosystem-heading" style={{ textAlign: 'center', marginBottom: 0 }}>
+            <div className="section-tag" style={{ display: 'inline-flex' }}>BEYOND THE CLASSROOM</div>
+            <h2 className="section-title" style={{ marginTop: 12 }}>A bigger world of <em>possibility.</em></h2>
             <p className="section-lead" style={{ margin: '8px auto 0' }}>
               Everything Spark E-Cell and SBIT — one place to find it all.
             </p>
@@ -79,45 +80,31 @@ export default function Home() {
 
           <div className="ecosystem-grid">
 
-            {/* ── Eureka Event Card (featured, dark) ── */}
+            {/* ── Eureka Event Card (featured) ── */}
             <a
-              href="https://eureka.sparkecell.in"   /* ← replace with your Eureka site URL */
+              href="https://spark-ecell-eureka.netlify.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="ecosystem-card eureka-card"
-              style={{ flex: '1 1 320px' }}
             >
-              <div className="ecosystem-card-icon">💡</div>
+              <div className="ecosystem-card-icon">
+                <Lightbulb size={24} />
+              </div>
               <div>
-                <div style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 6,
-                  background: 'rgba(245,197,24,0.15)', border: '1px solid rgba(245,197,24,0.35)',
-                  borderRadius: 999, padding: '3px 10px', fontSize: 11,
-                  fontWeight: 700, color: '#f5c518', marginBottom: 8
-                }}>
-                  ⚡ Flagship Event
+                <div className="eureka-badge">
+                  <Sparkles size={12} />
+                  <span>Flagship Event</span>
                 </div>
-                <div className="ecosystem-card-title" style={{ fontSize: 22 }}>Eureka!</div>
+                <div className="ecosystem-card-title">Eureka!</div>
               </div>
               <p className="ecosystem-card-desc">
                 SBIT's premier entrepreneurship challenge where student innovators pitch ideas, build prototypes, and compete for mentorship and seed support.
               </p>
-              <div style={{ marginTop: 8 }}>
-                <a
-                  href="https://spark-ecell-eureka.netlify.app/"   /* ← same URL */
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-eureka"
-                  onClick={e => e.stopPropagation()}
-                >
-                  <span className="btn-eureka-pulse" />
-                  Visit Eureka Site
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                    <polyline points="15 3 21 3 21 9"/>
-                    <line x1="10" y1="14" x2="21" y2="3"/>
-                  </svg>
-                </a>
+              <div className="eureka-card-footer">
+                <span className="btn-eureka">
+                  <span>Visit Eureka Site</span>
+                  <ExternalLink size={15} />
+                </span>
               </div>
             </a>
 
@@ -128,7 +115,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="ecosystem-card"
             >
-              <div className="ecosystem-card-icon">🏛️</div>
+              <div className="ecosystem-card-icon"><Landmark size={25}/></div>
               <div className="ecosystem-card-title">SBIT Official Website</div>
               <p className="ecosystem-card-desc">
                 Swarna Bharathi Institute of Science &amp; Technology — admissions, academics, departments, and campus life.
@@ -151,8 +138,8 @@ export default function Home() {
         <div className="section-inner">
           <div className="blog-header">
             <div>
-              <div className="section-tag">📝 Stories</div>
-              <h2 className="section-title">Ideas, lessons and updates.</h2>
+              <div className="section-tag">NOTES FROM THE COMMUNITY</div>
+              <h2 className="section-title">Things we’re <em>figuring out.</em></h2>
               <p className="section-lead" style={{ marginTop: '6px' }}>
                 Notes and updates from the Spark E-Cell community.
               </p>

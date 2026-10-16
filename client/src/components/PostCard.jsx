@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, User } from 'lucide-react';
+import { linkifyText } from './PostContent';
 
 export default function PostCard({ post }) {
   const formattedDate = new Date(post.publishAt).toLocaleDateString(undefined, {
@@ -24,7 +25,7 @@ export default function PostCard({ post }) {
         </h3>
 
         <p className="post-card-excerpt">
-          {post.excerpt || post.content}
+          {linkifyText(post.excerpt || post.content)}
         </p>
       </div>
 

@@ -28,7 +28,7 @@ export function resolveMediaUrl(url) {
     return url;
   }
   if (url.startsWith('/uploads')) {
-    const base = API_BASE || 'https://spark-e-cell.onrender.com';
+    const base = API_BASE || '';
     return `${base}${url}`;
   }
   return url;

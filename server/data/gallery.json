@@ -1,0 +1,14 @@
+[
+  {
+    "id": "gal-5",
+    "title": "Prototyping & Hardware Maker Lab",
+    "desc": "24/7 dedicated campus makerspace equipped with 3D printers, IoT benches, and circuit fabrication.",
+    "url": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80"
+  },
+  {
+    "id": "gal-6",
+    "title": "48-Hour Startup Buildathon",
+    "desc": "Rapid product design, code sprints, and mentor validation sessions with 150+ student developers.",
+    "url": "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1600&q=80"
+  }
+]

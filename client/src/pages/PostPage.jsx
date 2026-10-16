@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchPostById } from '../api';
 import { ArrowLeft, Calendar, User, AlertCircle } from 'lucide-react';
+import PostContent from '../components/PostContent';
 
 export default function PostPage() {
   const { id } = useParams();
@@ -94,7 +95,7 @@ export default function PostPage() {
         </header>
 
         <article className="post-detail-content">
-          {post.content}
+          <PostContent content={post.content} />
         </article>
 
         <div style={{

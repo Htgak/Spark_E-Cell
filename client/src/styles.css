@@ -557,7 +557,8 @@ body { background:var(--bg-canvas); }
 .post-detail-header { margin-bottom: 30px; padding-bottom: 24px; border-bottom: 1px solid var(--border-subtle); }
 .post-detail-title { margin-bottom: 17px; color: var(--text-heading); font: 700 clamp(2rem, 5vw, 3.4rem)/1.1 'Manrope', sans-serif; letter-spacing: -.06em; }
 .post-detail-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; color: var(--text-muted); font-size: 13px; }
-.post-detail-content { color: var(--text-secondary); font-size: 16px; line-height: 1.9; white-space: pre-line; }
+.post-detail-content { color: var(--text-secondary); font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; }
+.post-detail-content a, .post-card-excerpt a { color: var(--accent-blue); text-decoration: underline; text-underline-offset: 3px; }
 
 .state-box { width: 100%; padding: 44px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 11px; text-align: center; background: rgba(255,255,255,.65); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); }
 .state-title { color: var(--text-heading); font-size: 17px; font-weight: 700; }

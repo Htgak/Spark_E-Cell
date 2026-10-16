@@ -1,19 +1,50 @@
-# ── Environment ──────────────────────────────
+# ── Environment & Secrets ──────────────────────────────
 .env
 .env.local
 .env.*.local
+*.env
+*service-account*.json
+firebase-service-account.json
+*spark-e-cell*.json
+server/spark-e-cell.json
+*.pem
+*.key
+*.cert
 
-# ── Node ─────────────────────────────────────
+# ── Dependencies ──────────────────────────────────────
 node_modules/
+client/node_modules/
+.pnp
+.pnp.js
 
-# ── Vite / React build output ────────────────
+# ── Build & Cache ─────────────────────────────────────
+dist/
 client/dist/
+.vite/
+.eslintcache
+.cache/
 
-# ── Data files (contain user content) ────────
-server/data/
+# ── Data & Uploaded Media ─────────────────────────────
+server/uploads/
+uploads/
 
-# ── OS / Editor ──────────────────────────────
+# ── Logs & Debugging ──────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Temporary & Test Scripts ──────────────────────────
+test_*.js
+*.tmp
+tmp/
+temp/
+
+# ── OS & IDE Metadata ─────────────────────────────────
 .DS_Store
 Thumbs.db
-*.log
-
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

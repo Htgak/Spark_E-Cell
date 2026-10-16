@@ -35,6 +35,16 @@ Node.js + Express API (server/server.js)
   └─ Load / Save JSON Storage (server/data/posts.json)
 ```
 
+### Firebase setup
+
+1. Create a Firebase project, enable Firestore and Cloud Storage, and create a service account for the server.
+2. Set `FIREBASE_SERVICE_ACCOUNT_JSON` (the complete service account JSON) or `FIREBASE_SERVICE_ACCOUNT_PATH` (a private file path) in the server environment. Set `FIREBASE_STORAGE_BUCKET` to the bucket name shown in Firebase Storage.
+3. Deploy the server with `ADMIN_PASSWORD` set to a strong secret. Keep Firebase credentials on the server; do not put them in `VITE_*` variables.
+4. For the first deploy, set `FIREBASE_MIGRATE_LOCAL_DATA=true` to copy existing `server/data/posts.json` and `gallery.json` records into Firestore. Turn it off afterward. The source JSON files remain untouched.
+5. Ensure the service account has Firestore access and permission to write and make uploaded objects public in the configured Storage bucket.
+
+Without Firebase credentials, data endpoints return a configuration error and never create empty files that could replace content.
+
 ---
 
 ## ⚙️ Scheduling Logic (PRD 6.3)
